@@ -6,4 +6,7 @@
     <string name="attribute_list">Attribute List</string>
     <string name="name">Name:</string>
     <string name="create_attribute">Create Attribute</string>
+    <string name="ok">OK</string>
+    <string name="edit_attribute">Edit Attribute</string>
+    <string name="delete">Delete</string>
 </resources>
