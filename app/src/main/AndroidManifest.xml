@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".Attributes"/>
+        <activity android:name=".Attributes" />
 
     </application>
 

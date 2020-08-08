@@ -1,20 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent" >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true" android:text="@string/attribute_list"
-        android:textSize="40sp" android:textAlignment="center" android:textStyle="bold"
-        android:id="@+id/txtView" android:gravity="center_horizontal" />
+    <TextView
+        android:id="@+id/txtView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:text="@string/attribute_list"
+        android:textAlignment="center"
+        android:textSize="40sp"
+        android:textStyle="bold" />
 
-    <ListView android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:layout_below="@+id/txtView" />
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/listView" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnAdd"
-        android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true" android:layout_margin="20dp"
-        android:layout_alignParentEnd="true" android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="20dp"
         android:src="@mipmap/add_icon_foreground" />
 
 

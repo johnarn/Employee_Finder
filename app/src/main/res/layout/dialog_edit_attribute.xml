@@ -26,6 +26,7 @@
         android:textStyle="bold" />
 
     <EditText
+        android:id="@+id/editTextEditAttributeName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtViewCreateAttribute"
@@ -55,6 +56,7 @@
             />
 
         <Button
+            android:id="@+id/btnEditDelete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"

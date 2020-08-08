@@ -1,12 +1,12 @@
 package com.example.employeefinder;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
         Button btnAttributes = findViewById(R.id.btnAttributes);
         Button btnEmployees = findViewById(R.id.btnEmployees);
         Button btnMap = findViewById(R.id.btnMap);
-
 
 
         btnAttributes.setOnClickListener(new View.OnClickListener() {

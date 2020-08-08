@@ -1,51 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activityCreateAttribute"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:id="@+id/activityCreateAttribute">
+    android:layout_gravity="center">
 
     <TextView
+        android:id="@+id/txtViewCreateAttribute"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
         android:text="@string/create_attribute"
-        android:textSize="40sp"
         android:textAlignment="center"
-        android:textStyle="bold"
-        android:id="@+id/txtViewCreateAttribute"
-        android:gravity="center_horizontal" />
+        android:textSize="40sp"
+        android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/txtViewNameOfAttribute"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/txtViewCreateAttribute"
+        android:layout_margin="30dp"
         android:text="@string/name"
         android:textSize="30sp"
-        android:textStyle="bold"
-        android:id="@+id/txtViewNameOfAttribute"
-        android:layout_margin="30dp"
-        android:layout_below="@+id/txtViewCreateAttribute"/>
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/editTextAttributeName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/txtViewNameOfAttribute"
         android:layout_below="@+id/txtViewCreateAttribute"
         android:layout_margin="30sp"
         android:layout_toEndOf="@id/txtViewNameOfAttribute"
-        android:inputType="text"
+        android:layout_toRightOf="@id/txtViewNameOfAttribute"
         android:autofillHints="Name of Attribute"
-        />
+        android:inputType="text" />
 
     <Button
         android:id="@+id/btnCreateOk"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/ok"
         android:layout_below="@+id/txtViewNameOfAttribute"
         android:layout_centerInParent="true"
+        android:text="@string/ok"
         android:textSize="25sp"
 
         />
