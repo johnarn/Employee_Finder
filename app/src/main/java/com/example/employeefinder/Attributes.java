@@ -88,6 +88,7 @@ public class Attributes extends AppCompatActivity {
                             /*
                             TODO
                                 -Delete Attribute at listView and database
+                                -Remove this attribute from all the employees who has it
                              */
                             System.out.println(attributeEditName.getText());
                             editDialog.dismiss();
