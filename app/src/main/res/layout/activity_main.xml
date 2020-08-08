@@ -15,18 +15,21 @@
         android:gravity="center"
         >
         <Button
+            android:id="@+id/btnAttributes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/attributes"
             android:layout_margin="20sp"
             />
         <Button
+            android:id="@+id/btnEmployees"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/employees"
             android:layout_margin="20sp"
             />
         <Button
+            android:id="@+id/btnMap"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/map"
