@@ -68,12 +68,8 @@ public class Employees extends AppCompatActivity {
                 adapterAvailableAttributesOfEmployee.remove(adapterAvailableAttributesOfEmployee.getItem(position));
             }
         });
-
-
         adapterAttributesOfEmployee.notifyDataSetChanged();
         adapterAvailableAttributesOfEmployee.notifyDataSetChanged();
-
-
     }
 
 
