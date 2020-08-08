@@ -13,4 +13,11 @@
     <string name="create_employee">Create Employee</string>
     <string name="name_of_employee">Name of Employee</string>
     <string name="name_of_attribute">Name of Attribute</string>
+    <string name="date_of_birth">Date Of Birth</string>
+    <string name="driver_s_license">Driver\'s License:</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="home_address">Home Address</string>
+    <string name="available_attributes">Available Attributes</string>
+    <string name="edit_employee">Edit Employee</string>
 </resources>

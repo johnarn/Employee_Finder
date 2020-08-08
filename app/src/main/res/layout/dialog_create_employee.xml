@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activityCreateEmployee"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center">
+
+    <TextView
+        android:id="@+id/txtViewCreateEmployee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:text="@string/create_employee"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+
+    <EditText
+        android:id="@+id/editTextEmployeeName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtViewCreateEmployee"
+        android:layout_margin="5dp"
+        android:autofillHints="Name of Employee"
+        android:hint="@string/name_of_employee"
+        android:inputType="text" />
+
+
+    <EditText
+        android:id="@+id/editTextEmployeeDayOfBirth"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextEmployeeName"
+        android:layout_margin="5dp"
+        android:autofillHints="Date Of Birth"
+        android:hint="@string/date_of_birth"
+        android:inputType="text" />
+
+    <TextView
+        android:id="@+id/txtViewDriversLicense"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextEmployeeDayOfBirth"
+        android:layout_margin="5dp"
+        android:text="@string/driver_s_license"
+        android:textSize="20sp" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextEmployeeDayOfBirth"
+        android:layout_margin="5dp"
+        android:layout_toEndOf="@+id/txtViewDriversLicense"
+        android:layout_toRightOf="@+id/txtViewDriversLicense"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radioButtonYes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/yes" />
+
+        <RadioButton
+            android:id="@+id/radioButtonNo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no" />
+
+    </RadioGroup>
+
+
+    <EditText
+        android:id="@+id/editTextEmployeeHomeAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtViewDriversLicense"
+        android:layout_margin="5dp"
+        android:autofillHints="Home Address"
+        android:hint="@string/home_address"
+        android:inputType="text" />
+
+    <TextView
+
+        android:id="@+id/headerlist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextEmployeeHomeAddress"
+        android:layout_margin="10dp"
+        android:text="@string/attributes" />
+
+    <ListView
+        android:id="@+id/listViewAttributeOfEmployee"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_below="@+id/headerlist"
+
+        />
+
+    <TextView
+        android:id="@+id/headeravailablelistW"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/listViewAttributeOfEmployee"
+        android:layout_margin="10dp"
+        android:text="@string/available_attributes" />
+
+    <ListView
+        android:id="@+id/listViewAvailableAttributesOfEmployee"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_below="@+id/headeravailablelistW" />
+
+    <Button
+        android:id="@+id/btnCreateOk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/listViewAvailableAttributesOfEmployee"
+        android:layout_centerInParent="true"
+        android:background="@drawable/round_button"
+        android:text="@string/ok"
+        android:textSize="20sp" />
+
+
+</RelativeLayout>
