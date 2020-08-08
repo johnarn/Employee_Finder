@@ -35,7 +35,8 @@
         android:layout_toEndOf="@id/txtViewNameOfAttribute"
         android:layout_toRightOf="@id/txtViewNameOfAttribute"
         android:autofillHints="Name of Attribute"
-        android:inputType="text" />
+        android:inputType="text"
+        android:hint="@string/name_of_attribute"/>
 
     <Button
         android:id="@+id/btnCreateOk"

@@ -9,4 +9,8 @@
     <string name="ok">OK</string>
     <string name="edit_attribute">Edit Attribute</string>
     <string name="delete">Delete</string>
+    <string name="employees_list">Employees List</string>
+    <string name="create_employee">Create Employee</string>
+    <string name="name_of_employee">Name of Employee</string>
+    <string name="name_of_attribute">Name of Attribute</string>
 </resources>
