@@ -20,4 +20,5 @@
     <string name="home_address">Home Address</string>
     <string name="available_attributes">Available Attributes</string>
     <string name="edit_employee">Edit Employee</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
