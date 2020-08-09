@@ -17,10 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     public Context context = this;
 
-    private static boolean doesDatabaseExist(Context context, String dbName) {
-        File dbFile = context.getDatabasePath(dbName);
-        return dbFile.exists();
-    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,12 +65,14 @@ public class MainActivity extends AppCompatActivity {
 
         createTables(sql);
 
-        insertToAttributesTable(sql, "Jack");
-        insertToEmployeesTable(sql, "Name", "yes", "4/1/95", "home");
-
 
         readFromAttributesTable("*", sql);
         readFromEmployeesTable("*", sql);
+    }
+
+    private static boolean doesDatabaseExist(Context context, String dbName) {
+        File dbFile = context.getDatabasePath(dbName);
+        return dbFile.exists();
     }
 
     private void insertToEmployeesTable(SQLiteDatabase sql, String employee_name, String employee_license, String employee_birthday, String employee_address) {
