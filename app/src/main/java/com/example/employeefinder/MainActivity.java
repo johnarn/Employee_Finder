@@ -25,8 +25,9 @@ public class MainActivity extends AppCompatActivity {
         btnAttributes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, Attributes.class);
+                Intent intent = new Intent(context, AttributesActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -34,8 +35,18 @@ public class MainActivity extends AppCompatActivity {
         btnEmployees.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, Employees.class);
+                Intent intent = new Intent(context, EmployeesActivity.class);
                 startActivity(intent);
+                finish();
+            }
+        });
+
+        btnMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, SearchActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }

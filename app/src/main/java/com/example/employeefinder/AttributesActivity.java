@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class Attributes extends AppCompatActivity {
+public class AttributesActivity extends AppCompatActivity {
 
     private Context context = this;
     private EditText attributeName, attributeEditName;

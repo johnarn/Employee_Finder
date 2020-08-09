@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
-public class Employees extends AppCompatActivity {
+public class EmployeesActivity extends AppCompatActivity {
 
     //LIST OF ARRAY STRINGS WHICH WILL SERVE AS LIST ITEMS
     ArrayList<String> listAvailableItems = new ArrayList<String>();
