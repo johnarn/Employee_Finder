@@ -1,66 +1,18 @@
 package com.example.employeefinder;
 
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.File;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+import static android.content.Context.MODE_PRIVATE;
 
-    public Context context = this;
+public class DbController {
 
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        DbController dbController = new DbController(context);
-
-        Button btnAttributes = findViewById(R.id.btnAttributes);
-        Button btnEmployees = findViewById(R.id.btnEmployees);
-        Button btnMap = findViewById(R.id.btnMap);
-
-
-        btnAttributes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, AttributesActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
-
-        btnEmployees.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, EmployeesActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
-        btnMap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, SearchActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-    }
-
-    private void initializeDB() {
-        SQLiteDatabase sql = openOrCreateDatabase("CITE.db", MODE_PRIVATE, null);
+    public DbController(Context context){
+        SQLiteDatabase sql = context.openOrCreateDatabase("CITE.db", MODE_PRIVATE, null);
         createTables(sql);
     }
 
