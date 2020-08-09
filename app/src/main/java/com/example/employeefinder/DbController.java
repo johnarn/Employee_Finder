@@ -10,29 +10,37 @@ import java.util.ArrayList;
 import static android.content.Context.MODE_PRIVATE;
 
 public class DbController {
+    private SQLiteDatabase sql;
+    private ArrayList<Integer> attributes_ids = new ArrayList<>();
+    private ArrayList<String> attributes_names = new ArrayList<>();
+    private ArrayList<Integer> employees_ids = new ArrayList<>();
+    private ArrayList<String> employees_names = new ArrayList<>();
+    private ArrayList<String> licenses = new ArrayList<>();
+    private ArrayList<String> birthdays = new ArrayList<>();
+    private ArrayList<String> addresses = new ArrayList<>();
 
-    public DbController(Context context){
-        SQLiteDatabase sql = context.openOrCreateDatabase("CITE.db", MODE_PRIVATE, null);
-        createTables(sql);
+    public DbController(Context context) {
+        sql = context.openOrCreateDatabase("CITE.db", MODE_PRIVATE, null);
+        createTables();
     }
 
-    private static boolean doesDatabaseExist(Context context, String dbName) {
+    public static boolean doesDatabaseExist(Context context, String dbName) {
         File dbFile = context.getDatabasePath(dbName);
         return dbFile.exists();
     }
 
-    private void insertToEmployeesTable(SQLiteDatabase sql, String employee_name, String employee_license, String employee_birthday, String employee_address) {
+    public void insertToEmployeesTable(String employee_name, String employee_license, String employee_birthday, String employee_address) {
         String query = "INSERT INTO Employees(name, license, birthday, address) VALUES('" + employee_name + "','" + employee_license + "','" + employee_birthday + "','" + employee_address + "');";
         sql.execSQL(query);
     }
 
-    private void insertToAttributesTable(SQLiteDatabase sql, String attribute_name) {
+    public void insertToAttributesTable(String attribute_name) {
         String query = "INSERT INTO Attributes(name) VALUES('" + attribute_name + "');";
         sql.execSQL(query);
     }
 
-    public void dropTables(SQLiteDatabase db) {
-        Cursor c = db.rawQuery("SELECT name FROM sqlite_master WHERE type='table'", null);
+    public void dropTables() {
+        Cursor c = sql.rawQuery("SELECT name FROM sqlite_master WHERE type='table'", null);
         ArrayList<String> tables = new ArrayList<>();
 
         // iterate over the result set, adding every table name to a list
@@ -45,13 +53,13 @@ public class DbController {
             System.out.println("TABLES: " + table);
 
             String dropQuery = "DROP TABLE IF EXISTS " + table;
-            db.execSQL(dropQuery);
+            sql.execSQL(dropQuery);
         }
         c.close();
 
     }
 
-    public void createTables(SQLiteDatabase sql) {
+    public void createTables() {
         String query = "CREATE TABLE IF NOT EXISTS Attributes( _id INTEGER PRIMARY KEY, name TEXT);";
         sql.execSQL(query);
 
@@ -69,57 +77,77 @@ public class DbController {
 
     }
 
-    public void readFromAttributesTable(String column_name, SQLiteDatabase sql) {
+    public void readFromAttributesTable(String column_name) {
         String query = "SELECT " + column_name + " FROM  Attributes;";
         Cursor c = sql.rawQuery(query, null);
-        c.moveToFirst();
-        ArrayList<Integer> ids = new ArrayList<>();
-        ArrayList<String> attributes_names = new ArrayList<>();
         int id = -1;
         String attribute_name = "";
-        do {
+        if (c.moveToFirst()) {
+            attributes_ids.clear();
+            attributes_names.clear();
+            do {
 
-            id = c.getInt(0);
-            attribute_name = c.getString(1);
+                id = c.getInt(0);
+                attribute_name = c.getString(1);
 
+                attributes_ids.add(id);
+                attributes_names.add(attribute_name);
 
-            ids.add(id);
-            attributes_names.add(attribute_name);
+            } while (c.moveToNext());
+        }
 
-        } while (c.moveToNext());
-        System.out.println("FIRST ATTRIBUTE: " + ids.get(0) + " " + attributes_names.get(0));
         c.close();
     }
 
-    public void readFromEmployeesTable(String column_name, SQLiteDatabase sql) {
+    public void readFromEmployeesTable(String column_name) {
         String query = "SELECT " + column_name + " FROM  Employees;";
         Cursor c = sql.rawQuery(query, null);
-        c.moveToFirst();
-        ArrayList<Integer> ids = new ArrayList<>();
-        ArrayList<String> employees_names = new ArrayList<>();
-        ArrayList<String> licenses = new ArrayList<>();
-        ArrayList<String> birthdays = new ArrayList<>();
-        ArrayList<String> addresses = new ArrayList<>();
+        if (c.moveToFirst()) {
+            int id = -1;
+            String employee_name = "", license = "", birthday = "", address = "";
+            employees_ids.clear();
+            employees_names.clear();
+            licenses.clear();
+            birthdays.clear();
+            addresses.clear();
+            do {
 
-        int id = -1;
-        String employee_name = "", license = "", birthday = "", address = "";
-        do {
-
-            id = c.getInt(0);
-            employee_name = c.getString(1);
-            license = c.getString(2);
-            birthday = c.getString(3);
-            address = c.getString(4);
+                id = c.getInt(0);
+                employee_name = c.getString(1);
+                license = c.getString(2);
+                birthday = c.getString(3);
+                address = c.getString(4);
 
 
-            ids.add(id);
-            employees_names.add(employee_name);
-            licenses.add(license);
-            birthdays.add(birthday);
-            addresses.add(address);
+                employees_ids.add(id);
+                employees_names.add(employee_name);
+                licenses.add(license);
+                birthdays.add(birthday);
+                addresses.add(address);
 
-        } while (c.moveToNext());
-        System.out.println("FIRST EMPLOYEE: " + ids.get(0) + " " + employees_names.get(0) + " " + licenses.get(0) + " " + birthdays.get(0) + " " + addresses.get(0) + " ");
+            } while (c.moveToNext());
+        }
         c.close();
+    }
+
+    public boolean containIntoAttributeTable(String name) {
+        readFromAttributesTable("*");
+        return attributes_names.contains(name);
+    }
+
+    public boolean replaceAttribute(String name) {
+        String query = "INSERT INTO Attributes(name) VALUES('" + name + "');";
+        sql.execSQL(query);
+        readFromAttributesTable("*");
+        return attributes_names.contains(name);
+    }
+
+    public boolean removeAttribute(String name) {
+
+        String query = "DELETE FROM Attributes WHERE name LIKE '" + name + "';";
+        sql.execSQL(query);
+        readFromAttributesTable("*");
+        return !attributes_names.contains(name);
+
     }
 }
