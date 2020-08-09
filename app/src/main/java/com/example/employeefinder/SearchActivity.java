@@ -7,14 +7,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
-
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -34,18 +34,19 @@ public class SearchActivity extends AppCompatActivity {
         list = new ArrayList<String>();
         list.add("Apple");
         list.add("Banana");
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,list);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
         listView.setAdapter(adapter);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                if(list.contains(query)){
+                if (list.contains(query)) {
                     adapter.getFilter().filter(query);
-                }else{
-                    Toast.makeText(SearchActivity.this, "No Match found",Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(SearchActivity.this, "No Match found", Toast.LENGTH_LONG).show();
                 }
                 return false;
             }
+
             @Override
             public boolean onQueryTextChange(String newText) {
                 adapter.getFilter().filter(newText);
@@ -62,5 +63,9 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
+
     }
+
+
 }
+
