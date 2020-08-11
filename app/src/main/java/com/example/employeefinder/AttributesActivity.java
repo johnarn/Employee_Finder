@@ -31,7 +31,9 @@ public class AttributesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attributes);
+
         dbController = new DbController(context);
+
 
         FloatingActionButton btnAdd = findViewById(R.id.btnAdd);
         final ListView listView = findViewById(R.id.listView);
@@ -45,6 +47,8 @@ public class AttributesActivity extends AppCompatActivity {
         createDialog.setContentView(R.layout.dialog_create_attribute);
         createDialog.setCancelable(false);
 
+        listItems = dbController.getAttributes_names();
+
         adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1,
                 listItems);
@@ -55,7 +59,6 @@ public class AttributesActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 createDialog.show();
-
                 if (createDialog.isShowing()) {
                     btnOk = createDialog.findViewById(R.id.btnCreateOk);
                     attributeName = createDialog.findViewById(R.id.editTextAttributeName);
@@ -81,7 +84,6 @@ public class AttributesActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                 editDialog.show();
-
                 if (editDialog.isShowing()) {
                     btnEditOk = editDialog.findViewById(R.id.btnEditOK);
                     btnEditDelete = editDialog.findViewById(R.id.btnEditDelete);
@@ -89,12 +91,15 @@ public class AttributesActivity extends AppCompatActivity {
                     btnEditOk.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            dbController.replaceAttribute(attributeEditName.getText().toString());
-                            listItems.set(position, attributeEditName.getText().toString());
+                            dbController.replaceAttribute(listView.getItemAtPosition(position).toString(), attributeEditName.getText().toString());
+                            System.out.println("POSITION: " + position);
+                            listItems = dbController.getAttributes_names();
+
                             adapter = new ArrayAdapter<String>(context,
                                     android.R.layout.simple_list_item_1,
                                     listItems);
                             listView.setAdapter(adapter);
+                            attributeEditName.setText("");
                             editDialog.dismiss();
                         }
                     });
@@ -107,6 +112,7 @@ public class AttributesActivity extends AppCompatActivity {
                                     android.R.layout.simple_list_item_1,
                                     listItems);
                             listView.setAdapter(adapter);
+                            attributeEditName.setText("");
                             editDialog.dismiss();
                         }
                     });

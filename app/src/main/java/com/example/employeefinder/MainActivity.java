@@ -8,9 +8,11 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+
 public class MainActivity extends AppCompatActivity {
 
     public Context context = this;
+    public DbController dbController;
 
 
     @Override
@@ -18,11 +20,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /*
-         TODO
-            -Exchange the dbController through out the whole project
-         */
-        final DbController dbController = new DbController(context);
+        dbController = new DbController(context);
+
 
         Button btnAttributes = findViewById(R.id.btnAttributes);
         Button btnEmployees = findViewById(R.id.btnEmployees);
@@ -34,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(context, AttributesActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
 
@@ -44,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(context, EmployeesActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
 
@@ -53,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(context, SearchActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
     }

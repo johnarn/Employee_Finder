@@ -3,14 +3,21 @@ package com.example.employeefinder;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Parcel;
+import android.os.Parcelable;
+
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class DbController {
+public class DbController{
     private SQLiteDatabase sql;
+
+
+
     private ArrayList<Integer> attributes_ids = new ArrayList<>();
     private ArrayList<String> attributes_names = new ArrayList<>();
     private ArrayList<Integer> employees_ids = new ArrayList<>();
@@ -18,10 +25,102 @@ public class DbController {
     private ArrayList<String> licenses = new ArrayList<>();
     private ArrayList<String> birthdays = new ArrayList<>();
     private ArrayList<String> addresses = new ArrayList<>();
+    private ArrayList<Integer> employee_attribute_ids = new ArrayList<>();
+
 
     public DbController(Context context) {
         sql = context.openOrCreateDatabase("CITE.db", MODE_PRIVATE, null);
         createTables();
+    }
+
+    public ArrayList<String> getEmployee_attribute_names(String employee_name){
+        readFromEmployeeAttributeTable("*", employee_name);
+        ArrayList<Integer> attr_ids = getAttributes_ids();
+        ArrayList<String> attr_names = getAttributes_names();
+        ArrayList<String> employee_attribute_names = new ArrayList<>();
+
+        System.out.println("EMP_ATTR_IDS: " + employee_attribute_ids.toString());
+
+        for(int i=0; i<employee_attribute_ids.size(); i++){
+
+            int position = attr_ids.indexOf(employee_attribute_ids.get(i));
+            employee_attribute_names.add(attr_names.get(position));
+        }
+        System.out.println("ATTRIBUTES: " + attr_names.toString());
+        System.out.println("EMPLOYEE_NAME: " + employee_name + " has: " + employee_attribute_names.toString());
+
+        return employee_attribute_names;
+    }
+
+    public SQLiteDatabase getSql() {
+        return sql;
+    }
+
+    public void setSql(SQLiteDatabase sql) {
+        this.sql = sql;
+    }
+
+    public ArrayList<Integer> getAttributes_ids() {
+        readFromAttributesTable("*");
+        return attributes_ids;
+    }
+
+    public void setAttributes_ids(ArrayList<Integer> attributes_ids) {
+        this.attributes_ids = attributes_ids;
+    }
+
+    public ArrayList<String> getAttributes_names() {
+        readFromAttributesTable("*");
+        return attributes_names;
+    }
+
+    public void setAttributes_names(ArrayList<String> attributes_names) {
+        this.attributes_names = attributes_names;
+    }
+
+    public ArrayList<Integer> getEmployees_ids() {
+        readFromEmployeesTable("*");
+        return employees_ids;
+    }
+
+    public void setEmployees_ids(ArrayList<Integer> employees_ids) {
+        this.employees_ids = employees_ids;
+    }
+
+    public ArrayList<String> getEmployees_names() {
+        readFromEmployeesTable("*");
+        return employees_names;
+    }
+
+    public void setEmployees_names(ArrayList<String> employees_names) {
+        this.employees_names = employees_names;
+    }
+
+    public ArrayList<String> getLicenses() {
+        readFromEmployeesTable("*");
+        return licenses;
+    }
+
+    public void setLicenses(ArrayList<String> licenses) {
+        this.licenses = licenses;
+    }
+
+    public ArrayList<String> getBirthdays() {
+        readFromEmployeesTable("*");
+        return birthdays;
+    }
+
+    public void setBirthdays(ArrayList<String> birthdays) {
+        this.birthdays = birthdays;
+    }
+
+    public ArrayList<String> getAddresses() {
+        readFromEmployeesTable("*");
+        return addresses;
+    }
+
+    public void setAddresses(ArrayList<String> addresses) {
+        this.addresses = addresses;
     }
 
     public static boolean doesDatabaseExist(Context context, String dbName) {
@@ -36,6 +135,53 @@ public class DbController {
 
     public void insertToAttributesTable(String attribute_name) {
         String query = "INSERT INTO Attributes(name) VALUES('" + attribute_name + "');";
+        sql.execSQL(query);
+    }
+
+    public void insertToEmployeeAttributeTable(String attribute_name, String employee_name) {
+        readFromAttributesTable("*");
+        readFromEmployeesTable("*");
+        int attr_position = attributes_names.indexOf(attribute_name);
+        int empl_position = employees_names.indexOf(employee_name);
+        System.out.println("AttributeID: " + attr_position + " EmployeeID: " + empl_position);
+        String query = "INSERT INTO EmployeeAttribute(attribute_id, employee_id) VALUES('" + attributes_ids.get(attr_position) + "', '" + employees_ids.get(empl_position) + "');";
+        sql.execSQL(query);
+    }
+
+    public void replaceToEmployeeAttributeTable(String attribute_name, String employee_name, boolean flag){
+
+        if(flag){
+            removeFromEmployeeAttributeTable(employee_name);
+        }
+        readFromAttributesTable("*");
+        readFromEmployeesTable("*");
+        insertToEmployeeAttributeTable(attribute_name, employee_name);
+    }
+
+    public void readFromEmployeeAttributeTable(String column_name, String employee_name){
+        readFromEmployeesTable("*");
+        int emp_id = employees_ids.get(employees_names.indexOf(employee_name));
+        System.out.println("EMPLOYEE_NAME : " + employee_name);
+        String query = "SELECT " + column_name + " FROM  EmployeeAttribute WHERE employee_id LIKE '" + emp_id + "';";
+        Cursor c = sql.rawQuery(query, null);
+        int attr_id = -1;
+        if (c.moveToFirst()) {
+            employee_attribute_ids.clear();
+            do {
+                attr_id = c.getInt(0);
+                employee_attribute_ids.add(attr_id);
+
+            } while (c.moveToNext());
+        }
+        System.out.println("EMPLOYEE_ATTRIB: " + employee_attribute_ids.toString());
+        c.close();
+    }
+
+    public void removeFromEmployeeAttributeTable(String employee_name){
+        readFromEmployeesTable("*");
+        readFromAttributesTable("*");
+        int empl_position = employees_names.indexOf(employee_name);
+        String query = "DELETE FROM EmployeeAttribute WHERE employee_id LIKE '" + employees_ids.get(empl_position) +"' ;";
         sql.execSQL(query);
     }
 
@@ -135,11 +281,20 @@ public class DbController {
         return attributes_names.contains(name);
     }
 
-    public boolean replaceAttribute(String name) {
-        String query = "INSERT INTO Attributes(name) VALUES('" + name + "');";
-        sql.execSQL(query);
+    public boolean replaceAttribute(String oldName, String newName) {
+        removeAttribute(oldName);
+        insertToAttributesTable(newName);
         readFromAttributesTable("*");
-        return attributes_names.contains(name);
+        return attributes_names.contains(newName);
+    }
+
+    public boolean replaceEmployee(String old_employee_name,
+                                   String new_employee_name, String new_employee_license, String new_employee_birthday, String new_employee_address){
+
+        removeEmployee(old_employee_name);
+        insertToEmployeesTable(new_employee_name, new_employee_license, new_employee_birthday, new_employee_address);
+        readFromEmployeesTable("*");
+        return employees_names.contains(new_employee_name);
     }
 
     public boolean removeAttribute(String name) {
@@ -150,4 +305,33 @@ public class DbController {
         return !attributes_names.contains(name);
 
     }
+
+    public boolean removeEmployee(String name) {
+
+        String query = "DELETE FROM Employees WHERE name LIKE '" + name + "';";
+        sql.execSQL(query);
+        readFromEmployeesTable("*");
+        return !employees_names.contains(name);
+
+    }
+
+    public ArrayList<Integer> getAttributesOfEmployee(int empl_id){
+        String query = "SELECT * FROM  EmployeeAttribute WHERE employee_id LIKE '" + empl_id + "';";
+        Cursor c = sql.rawQuery(query, null);
+        ArrayList<Integer> attributesOfEmployee = new ArrayList<>();
+        if (c.moveToFirst()) {
+            int Aid = -1;
+            do {
+
+                attributesOfEmployee.add(c.getInt(0));
+
+
+            } while (c.moveToNext());
+        }
+        c.close();
+        return attributesOfEmployee;
+    }
+
+
+
 }
