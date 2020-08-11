@@ -67,7 +67,7 @@ public class AttributesActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
 
-                            if (attributeEditName.getText().toString().matches("")) {
+                            if (attributeName.getText().toString().matches("")) {
                                 Toast.makeText(AttributesActivity.this, "You did not enter a name", Toast.LENGTH_SHORT).show();
                                 return;
                             }
@@ -80,6 +80,7 @@ public class AttributesActivity extends AppCompatActivity {
                                     android.R.layout.simple_list_item_1,
                                     listItems);
                             listView.setAdapter(adapter);
+                            attributeName.setText("");
                             createDialog.dismiss();
                         }
                     });

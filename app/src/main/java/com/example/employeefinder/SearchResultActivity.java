@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class SearchResultActivity extends AppCompatActivity {
     private DbController dbController;
@@ -25,13 +26,12 @@ public class SearchResultActivity extends AppCompatActivity {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_result);
 
 
         dbController = new DbController(this);
+        final HashMap<String, Boolean> employees_names = new HashMap<>();
 
         String attr_name = getIntent().getStringExtra("attribute_name");
 
@@ -51,6 +51,7 @@ public class SearchResultActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position,long arg3) {
                 view.setSelected(true);
                 positionOfItem = position;
+
             }
         });
 
@@ -58,7 +59,16 @@ public class SearchResultActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SearchResultActivity.this, MapsActivity.class);
-                intent.putExtra("employee_name", employee_names.get(positionOfItem));
+
+                for(String name : employee_names){
+                    if(employee_names.get(positionOfItem).equals(name)){
+                        employees_names.put(name, true);
+                    }else{
+                        employees_names.put(name, false);
+                    }
+                }
+
+                intent.putExtra("HashMapOfEmployeesNames", employees_names);
                 startActivity(intent);
             }
         });

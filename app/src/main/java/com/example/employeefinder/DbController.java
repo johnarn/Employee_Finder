@@ -348,6 +348,11 @@ public class DbController {
     }
 
 
+    public String getHomeAddress(String emp_name) {
+        readFromEmployeesTable("*");
+        int position = employees_names.indexOf(emp_name);
 
 
+        return addresses.get(position);
+    }
 }

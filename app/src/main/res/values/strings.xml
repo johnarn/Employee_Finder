@@ -17,7 +17,7 @@
     <string name="driver_s_license">Driver\'s License:</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="home_address">Home Address</string>
+    <string name="home_address">Home Address (Street Number, City)</string>
     <string name="available_attributes">Available Attributes</string>
     <string name="edit_employee">Edit Employee</string>
     <string name="title_activity_maps">Map</string>
