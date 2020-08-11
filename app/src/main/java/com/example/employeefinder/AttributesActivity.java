@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -65,6 +66,12 @@ public class AttributesActivity extends AppCompatActivity {
                     btnOk.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+
+                            if(attributeEditName.getText().toString().matches("")){
+                                Toast.makeText(AttributesActivity.this, "You did not enter a name", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+
                             if (!dbController.containIntoAttributeTable(attributeName.getText().toString())) {
                                 dbController.insertToAttributesTable(attributeName.getText().toString());
                                 listItems.add(attributeName.getText().toString());
@@ -91,6 +98,10 @@ public class AttributesActivity extends AppCompatActivity {
                     btnEditOk.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            if(attributeEditName.getText().toString().matches("")){
+                                Toast.makeText(AttributesActivity.this, "You did not enter a name", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
                             dbController.replaceAttribute(listView.getItemAtPosition(position).toString(), attributeEditName.getText().toString());
                             System.out.println("POSITION: " + position);
                             listItems = dbController.getAttributes_names();

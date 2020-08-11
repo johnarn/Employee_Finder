@@ -61,6 +61,22 @@ public class EditEmployee extends Activity {
             @Override
             public void onClick(View v) {
 
+                if (editTextEmployeeName.getText().toString().matches("")) {
+                    Toast.makeText(EditEmployee.this, "You did not enter a name", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (editTextEmployeeDayOfBirth.getText().toString().matches("")) {
+                    Toast.makeText(EditEmployee.this, "You did not enter a birthday", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (editTextEmployeeHomeAddress.getText().toString().matches("")) {
+                    Toast.makeText(EditEmployee.this, "You did not enter a home address", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (radioGroupDriversLicense.getCheckedRadioButtonId() == -1) {
+                    Toast.makeText(EditEmployee.this, "You did not enter driver's license", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 int radioButtonID = radioGroupDriversLicense.getCheckedRadioButtonId();
                 final RadioButton radioButton = radioGroupDriversLicense.findViewById(radioButtonID);
