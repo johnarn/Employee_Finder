@@ -36,7 +36,7 @@
         android:layout_margin="5dp"
         android:autofillHints="Date Of Birth"
         android:hint="@string/date_of_birth"
-        android:inputType="text" />
+        android:inputType="date" />
 
     <TextView
         android:id="@+id/txtViewDriversLicense"
@@ -80,7 +80,7 @@
         android:layout_margin="5dp"
         android:autofillHints="Home Address"
         android:hint="@string/home_address"
-        android:inputType="text" />
+        android:inputType="textPostalAddress" />
 
     <TextView
 

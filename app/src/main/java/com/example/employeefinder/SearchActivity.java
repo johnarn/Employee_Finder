@@ -22,20 +22,25 @@ public class SearchActivity extends AppCompatActivity {
     ListView listView;
     ArrayList<String> list;
     ArrayAdapter<String> adapter;
-    Context context = this;
+    private DbController dbController;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+        dbController = new DbController(this);
+
+
+
         searchView = findViewById(R.id.searchView);
         listView = findViewById(R.id.listView);
         list = new ArrayList<String>();
-        list.add("Apple");
-        list.add("Banana");
+        list = dbController.getAttributes_names();
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
         listView.setAdapter(adapter);
+
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -57,9 +62,9 @@ public class SearchActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(context, MapsActivity.class);
+                Intent intent = new Intent(SearchActivity.this, SearchResultActivity.class);
+                intent.putExtra("attribute_name", list.get(position).toString());
                 startActivity(intent);
-                finish();
             }
         });
 

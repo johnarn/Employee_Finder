@@ -21,6 +21,7 @@ public class DbController {
     private ArrayList<String> birthdays = new ArrayList<>();
     private ArrayList<String> addresses = new ArrayList<>();
     private ArrayList<Integer> employee_attribute_ids = new ArrayList<>();
+    private ArrayList<Integer> attribute_employee_ids = new ArrayList<>();
 
 
     public DbController(Context context) {
@@ -34,7 +35,7 @@ public class DbController {
     }
 
     public ArrayList<String> getEmployee_attribute_names(String employee_name) {
-        readFromEmployeeAttributeTable("*", employee_name);
+        readFromEmployeeAttributeTableToFindAttributes("*", employee_name);
         ArrayList<Integer> attr_ids = getAttributes_ids();
         ArrayList<String> attr_names = getAttributes_names();
         ArrayList<String> employee_attribute_names = new ArrayList<>();
@@ -44,6 +45,20 @@ public class DbController {
             employee_attribute_names.add(attr_names.get(position));
         }
         return employee_attribute_names;
+    }
+
+    public ArrayList<String> getAttribute_employee_names(String attribute_name){
+        readFromEmployeeAttributeTableToFindEmployees("*", attribute_name);
+        ArrayList<Integer> emp_ids = getEmployees_ids();
+        ArrayList<String> emp_names = getEmployees_names();
+        ArrayList<String> attribute_employee_names = new ArrayList<>();
+        for (int i = 0; i < attribute_employee_ids.size(); i++) {
+            int position = emp_ids.indexOf(attribute_employee_ids.get(i));
+            if(position>-1 && position <emp_names.size()){
+                attribute_employee_names.add(emp_names.get(position));
+            }
+        }
+        return attribute_employee_names;
     }
 
     public SQLiteDatabase getSql() {
@@ -146,7 +161,7 @@ public class DbController {
         insertToEmployeeAttributeTable(attribute_name, employee_name);
     }
 
-    public void readFromEmployeeAttributeTable(String column_name, String employee_name) {
+    public void readFromEmployeeAttributeTableToFindAttributes(String column_name, String employee_name) {
         readFromEmployeesTable("*");
         int emp_id = employees_ids.get(employees_names.indexOf(employee_name));
         String query = "SELECT " + column_name + " FROM  EmployeeAttribute WHERE employee_id LIKE '" + emp_id + "';";
@@ -157,6 +172,22 @@ public class DbController {
             do {
                 attr_id = c.getInt(0);
                 employee_attribute_ids.add(attr_id);
+
+            } while (c.moveToNext());
+        }
+        c.close();
+    }
+    public void readFromEmployeeAttributeTableToFindEmployees(String column_name, String attribute_name) {
+        readFromAttributesTable("*");
+        int attr_id = attributes_ids.get(attributes_names.indexOf(attribute_name));
+        String query = "SELECT " + column_name + " FROM  EmployeeAttribute WHERE attribute_id LIKE '" + attr_id + "';";
+        Cursor c = sql.rawQuery(query, null);
+        int emp_id = -1;
+        if (c.moveToFirst()) {
+            attribute_employee_ids.clear();
+            do {
+                emp_id = c.getInt(1);
+                attribute_employee_ids.add(emp_id);
 
             } while (c.moveToNext());
         }
@@ -315,6 +346,8 @@ public class DbController {
         c.close();
         return attributesOfEmployee;
     }
+
+
 
 
 }
