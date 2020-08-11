@@ -43,8 +43,8 @@
         <activity android:name=".AttributesActivity" />
         <activity android:name=".EmployeesActivity" />
         <activity android:name=".SearchActivity" />
-        <activity android:name=".CreateEmployee"/>
-        <activity android:name=".EditEmployee"/>
+        <activity android:name=".CreateEmployee" />
+        <activity android:name=".EditEmployee" />
     </application>
 
 </manifest>

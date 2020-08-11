@@ -3,19 +3,14 @@ package com.example.employeefinder;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Parcel;
-import android.os.Parcelable;
-
 
 import java.io.File;
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class DbController{
+public class DbController {
     private SQLiteDatabase sql;
-
 
 
     private ArrayList<Integer> attributes_ids = new ArrayList<>();
@@ -33,22 +28,21 @@ public class DbController{
         createTables();
     }
 
-    public ArrayList<String> getEmployee_attribute_names(String employee_name){
+    public static boolean doesDatabaseExist(Context context, String dbName) {
+        File dbFile = context.getDatabasePath(dbName);
+        return dbFile.exists();
+    }
+
+    public ArrayList<String> getEmployee_attribute_names(String employee_name) {
         readFromEmployeeAttributeTable("*", employee_name);
         ArrayList<Integer> attr_ids = getAttributes_ids();
         ArrayList<String> attr_names = getAttributes_names();
         ArrayList<String> employee_attribute_names = new ArrayList<>();
-
-        System.out.println("EMP_ATTR_IDS: " + employee_attribute_ids.toString());
-
-        for(int i=0; i<employee_attribute_ids.size(); i++){
+        for (int i = 0; i < employee_attribute_ids.size(); i++) {
 
             int position = attr_ids.indexOf(employee_attribute_ids.get(i));
             employee_attribute_names.add(attr_names.get(position));
         }
-        System.out.println("ATTRIBUTES: " + attr_names.toString());
-        System.out.println("EMPLOYEE_NAME: " + employee_name + " has: " + employee_attribute_names.toString());
-
         return employee_attribute_names;
     }
 
@@ -123,11 +117,6 @@ public class DbController{
         this.addresses = addresses;
     }
 
-    public static boolean doesDatabaseExist(Context context, String dbName) {
-        File dbFile = context.getDatabasePath(dbName);
-        return dbFile.exists();
-    }
-
     public void insertToEmployeesTable(String employee_name, String employee_license, String employee_birthday, String employee_address) {
         String query = "INSERT INTO Employees(name, license, birthday, address) VALUES('" + employee_name + "','" + employee_license + "','" + employee_birthday + "','" + employee_address + "');";
         sql.execSQL(query);
@@ -143,14 +132,13 @@ public class DbController{
         readFromEmployeesTable("*");
         int attr_position = attributes_names.indexOf(attribute_name);
         int empl_position = employees_names.indexOf(employee_name);
-        System.out.println("AttributeID: " + attr_position + " EmployeeID: " + empl_position);
         String query = "INSERT INTO EmployeeAttribute(attribute_id, employee_id) VALUES('" + attributes_ids.get(attr_position) + "', '" + employees_ids.get(empl_position) + "');";
         sql.execSQL(query);
     }
 
-    public void replaceToEmployeeAttributeTable(String attribute_name, String employee_name, boolean flag){
+    public void replaceToEmployeeAttributeTable(String attribute_name, String employee_name, boolean flag) {
 
-        if(flag){
+        if (flag) {
             removeFromEmployeeAttributeTable(employee_name);
         }
         readFromAttributesTable("*");
@@ -158,10 +146,9 @@ public class DbController{
         insertToEmployeeAttributeTable(attribute_name, employee_name);
     }
 
-    public void readFromEmployeeAttributeTable(String column_name, String employee_name){
+    public void readFromEmployeeAttributeTable(String column_name, String employee_name) {
         readFromEmployeesTable("*");
         int emp_id = employees_ids.get(employees_names.indexOf(employee_name));
-        System.out.println("EMPLOYEE_NAME : " + employee_name);
         String query = "SELECT " + column_name + " FROM  EmployeeAttribute WHERE employee_id LIKE '" + emp_id + "';";
         Cursor c = sql.rawQuery(query, null);
         int attr_id = -1;
@@ -173,15 +160,14 @@ public class DbController{
 
             } while (c.moveToNext());
         }
-        System.out.println("EMPLOYEE_ATTRIB: " + employee_attribute_ids.toString());
         c.close();
     }
 
-    public void removeFromEmployeeAttributeTable(String employee_name){
+    public void removeFromEmployeeAttributeTable(String employee_name) {
         readFromEmployeesTable("*");
         readFromAttributesTable("*");
         int empl_position = employees_names.indexOf(employee_name);
-        String query = "DELETE FROM EmployeeAttribute WHERE employee_id LIKE '" + employees_ids.get(empl_position) +"' ;";
+        String query = "DELETE FROM EmployeeAttribute WHERE employee_id LIKE '" + employees_ids.get(empl_position) + "' ;";
         sql.execSQL(query);
     }
 
@@ -196,8 +182,6 @@ public class DbController{
 
         // call DROP TABLE on every table name
         for (String table : tables) {
-            System.out.println("TABLES: " + table);
-
             String dropQuery = "DROP TABLE IF EXISTS " + table;
             sql.execSQL(dropQuery);
         }
@@ -289,7 +273,7 @@ public class DbController{
     }
 
     public boolean replaceEmployee(String old_employee_name,
-                                   String new_employee_name, String new_employee_license, String new_employee_birthday, String new_employee_address){
+                                   String new_employee_name, String new_employee_license, String new_employee_birthday, String new_employee_address) {
 
         removeEmployee(old_employee_name);
         insertToEmployeesTable(new_employee_name, new_employee_license, new_employee_birthday, new_employee_address);
@@ -315,7 +299,7 @@ public class DbController{
 
     }
 
-    public ArrayList<Integer> getAttributesOfEmployee(int empl_id){
+    public ArrayList<Integer> getAttributesOfEmployee(int empl_id) {
         String query = "SELECT * FROM  EmployeeAttribute WHERE employee_id LIKE '" + empl_id + "';";
         Cursor c = sql.rawQuery(query, null);
         ArrayList<Integer> attributesOfEmployee = new ArrayList<>();
@@ -331,7 +315,6 @@ public class DbController{
         c.close();
         return attributesOfEmployee;
     }
-
 
 
 }

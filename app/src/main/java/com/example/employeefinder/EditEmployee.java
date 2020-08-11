@@ -20,6 +20,8 @@ import java.util.ArrayList;
 
 public class EditEmployee extends Activity {
 
+    ArrayAdapter<String> adapterAttributesOfEmployee, adapterAvailableAttributesOfEmployee;
+    Context context;
     private Button btnEditOk;
     private EditText editTextEmployeeName, editTextEmployeeDayOfBirth, editTextEmployeeHomeAddress;
     private RadioGroup radioGroupDriversLicense;
@@ -27,11 +29,6 @@ public class EditEmployee extends Activity {
     private String old_name;
     private ListView listViewAttributeOfEmployee, listViewAvailableAttributesOfEmployee;
     private ArrayList<String> listAttributeOfEmployee, listAvailableAttributes;
-    ArrayAdapter<String> adapterAttributesOfEmployee, adapterAvailableAttributesOfEmployee;
-    Context context;
-
-
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,8 +50,6 @@ public class EditEmployee extends Activity {
         btnEditOk = findViewById(R.id.btnEditOk);
         listViewAvailableAttributesOfEmployee = findViewById(R.id.listViewAvailableAttributesOfEmployee);
         listViewAttributeOfEmployee = findViewById(R.id.listViewAttributeOfEmployee);
-
-
 
 
         btnEditOk.setOnClickListener(new View.OnClickListener() {
@@ -84,14 +79,13 @@ public class EditEmployee extends Activity {
                 dbController.replaceEmployee(old_name, editTextEmployeeName.getText().toString(),
                         radioButton.getText().toString(), editTextEmployeeDayOfBirth.getText().toString(),
                         editTextEmployeeHomeAddress.getText().toString());
-                Intent intent=new Intent();
-                intent.putExtra("NAME",editTextEmployeeName.getText().toString());
-                setResult(2,intent);
-                System.out.println(adapterAttributesOfEmployee.getCount());
-                for(int i=0; i< adapterAttributesOfEmployee.getCount(); i++){
-                    if(i == 0){
+                Intent intent = new Intent();
+                intent.putExtra("NAME", editTextEmployeeName.getText().toString());
+                setResult(2, intent);
+                for (int i = 0; i < adapterAttributesOfEmployee.getCount(); i++) {
+                    if (i == 0) {
                         dbController.replaceToEmployeeAttributeTable(adapterAttributesOfEmployee.getItem(i), editTextEmployeeName.getText().toString(), true);
-                    }else{
+                    } else {
                         dbController.replaceToEmployeeAttributeTable(adapterAttributesOfEmployee.getItem(i), editTextEmployeeName.getText().toString(), false);
                     }
                 }
@@ -103,7 +97,7 @@ public class EditEmployee extends Activity {
         listAvailableAttributes = dbController.getAttributes_names();
         listAttributeOfEmployee = dbController.getEmployee_attribute_names(old_name);
 
-        for(String attr : listAttributeOfEmployee){
+        for (String attr : listAttributeOfEmployee) {
             listAvailableAttributes.remove(attr);
         }
 
@@ -141,8 +135,6 @@ public class EditEmployee extends Activity {
         });
         adapterAttributesOfEmployee.notifyDataSetChanged();
         adapterAvailableAttributesOfEmployee.notifyDataSetChanged();
-
-
 
 
     }

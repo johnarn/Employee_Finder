@@ -1,9 +1,7 @@
 package com.example.employeefinder;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -21,18 +19,15 @@ import java.util.ArrayList;
 
 public class CreateEmployee extends Activity {
 
+    //DEFINING A STRING ADAPTER WHICH WILL HANDLE THE DATA OF THE LISTVIEW
+    ArrayAdapter<String> adapterAttributesOfEmployee, adapterAvailableAttributesOfEmployee;
     private Button btnCreateOk;
     private EditText editTextEmployeeName, editTextEmployeeDayOfBirth, editTextEmployeeHomeAddress;
     private RadioGroup radioGroupDriversLicense;
     private DbController dbController;
     private ArrayList<String> employees_list;
-
     private ListView listViewAvailableAttributesOfEmployee, listViewAttributeOfEmployee;
     private ArrayList<String> listAvailableAttributes, listAttributeOfEmployee;
-
-    //DEFINING A STRING ADAPTER WHICH WILL HANDLE THE DATA OF THE LISTVIEW
-    ArrayAdapter<String> adapterAttributesOfEmployee, adapterAvailableAttributesOfEmployee;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,7 +37,6 @@ public class CreateEmployee extends Activity {
 
         listAvailableAttributes = new ArrayList<>();
         listAttributeOfEmployee = new ArrayList<>();
-
 
 
         editTextEmployeeName = findViewById(R.id.editTextEmployeeName);
@@ -81,13 +75,13 @@ public class CreateEmployee extends Activity {
                         radioButton.getText().toString(), editTextEmployeeDayOfBirth.getText().toString(),
                         editTextEmployeeHomeAddress.getText().toString());
 
-                for(int i=0; i< adapterAttributesOfEmployee.getCount(); i++){
+                for (int i = 0; i < adapterAttributesOfEmployee.getCount(); i++) {
                     dbController.insertToEmployeeAttributeTable(adapterAttributesOfEmployee.getItem(i), editTextEmployeeName.getText().toString());
                 }
 
-                Intent intent=new Intent();
-                intent.putExtra("NAME",editTextEmployeeName.getText().toString());
-                setResult(2,intent);
+                Intent intent = new Intent();
+                intent.putExtra("NAME", editTextEmployeeName.getText().toString());
+                setResult(2, intent);
                 finish();//finishing activity
             }
 
@@ -128,10 +122,6 @@ public class CreateEmployee extends Activity {
         });
         adapterAttributesOfEmployee.notifyDataSetChanged();
         adapterAvailableAttributesOfEmployee.notifyDataSetChanged();
-
-
-
-
 
 
     }

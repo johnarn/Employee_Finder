@@ -67,7 +67,7 @@ public class AttributesActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
 
-                            if(attributeEditName.getText().toString().matches("")){
+                            if (attributeEditName.getText().toString().matches("")) {
                                 Toast.makeText(AttributesActivity.this, "You did not enter a name", Toast.LENGTH_SHORT).show();
                                 return;
                             }
@@ -98,12 +98,11 @@ public class AttributesActivity extends AppCompatActivity {
                     btnEditOk.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            if(attributeEditName.getText().toString().matches("")){
+                            if (attributeEditName.getText().toString().matches("")) {
                                 Toast.makeText(AttributesActivity.this, "You did not enter a name", Toast.LENGTH_SHORT).show();
                                 return;
                             }
                             dbController.replaceAttribute(listView.getItemAtPosition(position).toString(), attributeEditName.getText().toString());
-                            System.out.println("POSITION: " + position);
                             listItems = dbController.getAttributes_names();
 
                             adapter = new ArrayAdapter<String>(context,

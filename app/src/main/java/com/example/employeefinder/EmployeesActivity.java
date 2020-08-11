@@ -1,15 +1,12 @@
 package com.example.employeefinder;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -24,7 +21,6 @@ public class EmployeesActivity extends Activity {
     private DbController dbController;
 
     private FloatingActionButton btnAddEmployee;
-    private Context context;
     private ListView listViewOfEmployees;
     private ArrayAdapter<String> adapter;
     private int previous_position;
@@ -85,7 +81,7 @@ public class EmployeesActivity extends Activity {
                     listItems);
             listViewOfEmployees.setAdapter(adapter);
         }
-        if (requestCode == 3){
+        if (requestCode == 3) {
             String returnedResult = data.getStringExtra("NAME");
             listItems.set(previous_position, returnedResult);
             adapter = new ArrayAdapter<String>(this,
