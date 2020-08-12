@@ -15,12 +15,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class SearchResultActivity extends AppCompatActivity {
-    ArrayAdapter<String> adapter;
-    private DbController dbController;
-    private ListView listViewOfEmployees;
-    private Button btnContinue;
+
+    /**
+     * Initialize variables
+     */
     private int positionOfItem;
     private ArrayList<String> employee_names = new ArrayList<>();
+    private HashMap<String, Boolean> employees_names;
 
 
     @Override
@@ -28,47 +29,43 @@ public class SearchResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_result);
 
+        // Initialize the controller of the database
+        DbController dbController = new DbController(this);
 
-        dbController = new DbController(this);
-        final HashMap<String, Boolean> employees_names = new HashMap<>();
+        // HashMap that contains all the employees names that have the selected attribute
+        employees_names = new HashMap<>();
 
+        // Get the selected attribute name from previous activity (SearchActivity)
         String attr_name = getIntent().getStringExtra("attribute_name");
 
-        listViewOfEmployees = findViewById(R.id.listViewOfEmployees);
-        btnContinue = findViewById(R.id.btnContinue);
+        // Initialize the views of the SearchResultActivity
+        ListView listViewOfEmployees = findViewById(R.id.listViewOfEmployees);
+        Button btnContinue = findViewById(R.id.btnContinue);
 
-
+        // Populate the HashMap
         employee_names = dbController.getEmployeesNamesWithSpecificAttribute(attr_name);
 
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, employee_names);
+        //Populate the listView with the employees names that have the selected attribute
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, employee_names);
         listViewOfEmployees.setAdapter(adapter);
-
-
-        listViewOfEmployees.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long arg3) {
-                view.setSelected(true);
-                positionOfItem = position;
-
-            }
+        listViewOfEmployees.setOnItemClickListener((parent, view, position, arg3) -> {
+            view.setSelected(true);
+            positionOfItem = position;
         });
 
-        btnContinue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SearchResultActivity.this, MapsActivity.class);
-
-                for (String name : employee_names) {
-                    if (employee_names.get(positionOfItem).equals(name)) {
-                        employees_names.put(name, true);
-                    } else {
-                        employees_names.put(name, false);
-                    }
+        btnContinue.setOnClickListener(v -> {
+            Intent intent = new Intent(SearchResultActivity.this, MapsActivity.class);
+            // Set as true the selected employee
+            for (String name : employee_names) {
+                if (employee_names.get(positionOfItem).equals(name)) {
+                    employees_names.put(name, true);
+                } else {
+                    employees_names.put(name, false);
                 }
-
-                intent.putExtra("HashMapOfEmployeesNames", employees_names);
-                startActivity(intent);
             }
+            // Send the hashMap to MapsActivity
+            intent.putExtra("HashMapOfEmployeesNames", employees_names);
+            startActivity(intent);
         });
 
 
