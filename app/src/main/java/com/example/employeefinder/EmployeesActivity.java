@@ -3,8 +3,6 @@ package com.example.employeefinder;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -14,13 +12,10 @@ import java.util.ArrayList;
 
 public class EmployeesActivity extends Activity {
 
-
-    ArrayList<String> listItems = new ArrayList<String>();
-
-
-    private DbController dbController;
-
-    private FloatingActionButton btnAddEmployee;
+    /**
+     * Initialize variables
+     */
+    private ArrayList<String> listItems = new ArrayList<>();
     private ListView listViewOfEmployees;
     private ArrayAdapter<String> adapter;
     private int previous_position;
@@ -31,67 +26,74 @@ public class EmployeesActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_employees);
 
-        dbController = new DbController(this);
+        // Initialize the database controller
+        DbController dbController = new DbController(this);
 
+        // Initialize the views
         listViewOfEmployees = findViewById(R.id.listViewEmployees);
-        btnAddEmployee = findViewById(R.id.btnAddEmployee);
+        FloatingActionButton btnAddEmployee = findViewById(R.id.btnAddEmployee);
 
+        // Get all the employees names from the database
         listItems = dbController.getEmployees_names();
 
-        adapter = new ArrayAdapter<String>(this,
+        // Populate the listView with the employees names
+        adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1,
                 listItems);
         listViewOfEmployees.setAdapter(adapter);
 
+        listViewOfEmployees.setOnItemClickListener((parent, view, position, id) -> {
 
-        btnAddEmployee.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(EmployeesActivity.this, CreateEmployee.class);
-                startActivityForResult(intent, 2);
+            // Find the position of the selected employee
+            previous_position = position;
 
-            }
+            // Go to EditEmployee and send the name of the employee
+            Intent intent = new Intent(EmployeesActivity.this, EditEmployee.class);
+            intent.putExtra("old_name", listItems.get(position));
+            startActivityForResult(intent, 3);
         });
 
 
-        listViewOfEmployees.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                previous_position = position;
-                Intent intent = new Intent(EmployeesActivity.this, EditEmployee.class);
-                intent.putExtra("old_name", listItems.get(position));
-                startActivityForResult(intent, 3);
-            }
+        btnAddEmployee.setOnClickListener(v -> {
+
+            // Go to CreateEmployee
+            Intent intent = new Intent(EmployeesActivity.this, CreateEmployee.class);
+            startActivityForResult(intent, 2);
         });
-
-        adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1,
-                listItems);
-        listViewOfEmployees.setAdapter(adapter);
-
     }
 
+    /**
+     * Get Results from intents and update the view
+     */
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        // Results returned from CreateEmployee View
         if (requestCode == 2) {
+
+            // Get the returned result
             String returnedResult = data.getStringExtra("NAME");
+
+            // Update the listView of the Employees
             listItems.add(returnedResult);
-            adapter = new ArrayAdapter<String>(this,
+            adapter = new ArrayAdapter<>(this,
                     android.R.layout.simple_list_item_1,
                     listItems);
             listViewOfEmployees.setAdapter(adapter);
         }
+
+        // Results returned from EditEmployee View
         if (requestCode == 3) {
+
+            // Get the returned result
             String returnedResult = data.getStringExtra("NAME");
+
+            // Update the listView of the Employees
             listItems.set(previous_position, returnedResult);
-            adapter = new ArrayAdapter<String>(this,
+            adapter = new ArrayAdapter<>(this,
                     android.R.layout.simple_list_item_1,
                     listItems);
             listViewOfEmployees.setAdapter(adapter);
         }
-
-
     }
-
-
 }
