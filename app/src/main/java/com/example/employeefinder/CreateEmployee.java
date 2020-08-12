@@ -89,7 +89,7 @@ public class CreateEmployee extends Activity {
             @Override
             public void onClick(View v) {
 
-                // Security chekcs
+                // Security checks
                 if (editTextEmployeeName.getText().toString().matches("")) {
                     Toast.makeText(CreateEmployee.this, "You did not enter a name", Toast.LENGTH_SHORT).show();
                     return;
