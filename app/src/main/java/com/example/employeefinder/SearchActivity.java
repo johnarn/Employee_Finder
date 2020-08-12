@@ -1,6 +1,5 @@
 package com.example.employeefinder;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -30,7 +29,6 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         dbController = new DbController(this);
-
 
 
         searchView = findViewById(R.id.searchView);

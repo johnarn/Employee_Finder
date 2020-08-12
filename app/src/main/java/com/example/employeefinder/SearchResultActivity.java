@@ -2,7 +2,6 @@ package com.example.employeefinder;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -16,11 +15,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class SearchResultActivity extends AppCompatActivity {
+    ArrayAdapter<String> adapter;
     private DbController dbController;
     private ListView listViewOfEmployees;
     private Button btnContinue;
     private int positionOfItem;
-    ArrayAdapter<String> adapter;
     private ArrayList<String> employee_names = new ArrayList<>();
 
 
@@ -39,7 +38,6 @@ public class SearchResultActivity extends AppCompatActivity {
         btnContinue = findViewById(R.id.btnContinue);
 
 
-
         employee_names = dbController.getAttribute_employee_names(attr_name);
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, employee_names);
@@ -48,7 +46,7 @@ public class SearchResultActivity extends AppCompatActivity {
 
         listViewOfEmployees.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position,long arg3) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long arg3) {
                 view.setSelected(true);
                 positionOfItem = position;
 
@@ -60,10 +58,10 @@ public class SearchResultActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(SearchResultActivity.this, MapsActivity.class);
 
-                for(String name : employee_names){
-                    if(employee_names.get(positionOfItem).equals(name)){
+                for (String name : employee_names) {
+                    if (employee_names.get(positionOfItem).equals(name)) {
                         employees_names.put(name, true);
-                    }else{
+                    } else {
                         employees_names.put(name, false);
                     }
                 }
@@ -72,7 +70,6 @@ public class SearchResultActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
 
 
     }

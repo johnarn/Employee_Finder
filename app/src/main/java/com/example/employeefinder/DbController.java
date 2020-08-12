@@ -47,14 +47,14 @@ public class DbController {
         return employee_attribute_names;
     }
 
-    public ArrayList<String> getAttribute_employee_names(String attribute_name){
+    public ArrayList<String> getAttribute_employee_names(String attribute_name) {
         readFromEmployeeAttributeTableToFindEmployees("*", attribute_name);
         ArrayList<Integer> emp_ids = getEmployees_ids();
         ArrayList<String> emp_names = getEmployees_names();
         ArrayList<String> attribute_employee_names = new ArrayList<>();
         for (int i = 0; i < attribute_employee_ids.size(); i++) {
             int position = emp_ids.indexOf(attribute_employee_ids.get(i));
-            if(position>-1 && position <emp_names.size()){
+            if (position > -1 && position < emp_names.size()) {
                 attribute_employee_names.add(emp_names.get(position));
             }
         }
@@ -177,6 +177,7 @@ public class DbController {
         }
         c.close();
     }
+
     public void readFromEmployeeAttributeTableToFindEmployees(String column_name, String attribute_name) {
         readFromAttributesTable("*");
         int attr_id = attributes_ids.get(attributes_names.indexOf(attribute_name));
@@ -351,8 +352,12 @@ public class DbController {
     public String getHomeAddress(String emp_name) {
         readFromEmployeesTable("*");
         int position = employees_names.indexOf(emp_name);
-
-
         return addresses.get(position);
+    }
+
+    public String getDriversLicense(String emp_name) {
+        readFromEmployeesTable("*");
+        int position = employees_names.indexOf(emp_name);
+        return licenses.get(position);
     }
 }

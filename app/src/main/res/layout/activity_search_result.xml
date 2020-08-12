@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
-
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
 
     <TextView
@@ -15,8 +13,7 @@
         android:text="@string/employees"
         android:textAlignment="center"
         android:textSize="40sp"
-        android:textStyle="bold"
-        />
+        android:textStyle="bold" />
 
     <ListView
         android:id="@+id/listViewOfEmployees"
@@ -25,18 +22,16 @@
         android:layout_below="@+id/txtView"
         android:background="@drawable/bg_key"
         android:listSelector="@color/colorPrimary"
-        android:scrollbarAlwaysDrawVerticalTrack="true"
-        />
+        android:scrollbarAlwaysDrawVerticalTrack="true" />
 
     <Button
         android:id="@+id/btnContinue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/cont"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_margin="30dp"
-        android:textSize="20sp"
-        />
+        android:text="@string/cont"
+        android:textSize="20sp" />
 
 </RelativeLayout>
