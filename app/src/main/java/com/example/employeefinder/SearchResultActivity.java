@@ -38,7 +38,7 @@ public class SearchResultActivity extends AppCompatActivity {
         btnContinue = findViewById(R.id.btnContinue);
 
 
-        employee_names = dbController.getAttribute_employee_names(attr_name);
+        employee_names = dbController.getEmployeesNamesWithSpecificAttribute(attr_name);
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, employee_names);
         listViewOfEmployees.setAdapter(adapter);

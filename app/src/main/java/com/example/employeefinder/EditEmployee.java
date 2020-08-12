@@ -95,7 +95,7 @@ public class EditEmployee extends Activity {
 
 
         listAvailableAttributes = dbController.getAttributes_names();
-        listAttributeOfEmployee = dbController.getEmployee_attribute_names(old_name);
+        listAttributeOfEmployee = dbController.getAttributesNamesOfSpecificEmployee(old_name);
 
         for (String attr : listAttributeOfEmployee) {
             listAvailableAttributes.remove(attr);
