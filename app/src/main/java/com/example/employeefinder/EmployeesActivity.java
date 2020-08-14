@@ -21,9 +21,6 @@ public class EmployeesActivity extends Activity {
     private ArrayAdapter<String> adapter;
     private int previous_position;
 
-    private Dialog create_employee_dialog;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
