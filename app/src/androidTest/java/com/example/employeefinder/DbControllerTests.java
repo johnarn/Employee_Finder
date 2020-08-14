@@ -11,7 +11,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -21,11 +20,6 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-/**
- * Instrumented test, which will execute on an Android device.
- *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
- */
 @RunWith(AndroidJUnit4.class)
 public class DbControllerTests {
 
@@ -65,7 +59,7 @@ public class DbControllerTests {
     }
 
     @Test
-    public void testDropTablesShouldReturnTrue(){
+    public void testDropTablesShouldReturnTrue() {
         ArrayList<String> table_names = new ArrayList<>();
         dbController.dropTables();
         SQLiteDatabase sqLiteDatabase = appContext.openOrCreateDatabase("CITE.db", MODE_PRIVATE, null);
@@ -80,7 +74,7 @@ public class DbControllerTests {
     }
 
     @Test
-    public void testDropTablesShouldReturnFalse(){
+    public void testDropTablesShouldReturnFalse() {
         ArrayList<String> table_names = new ArrayList<>();
         dbController.dropTables();
         SQLiteDatabase sqLiteDatabase = appContext.openOrCreateDatabase("CITE.db", MODE_PRIVATE, null);
@@ -167,7 +161,7 @@ public class DbControllerTests {
     }
 
     @Test
-    public void testGetAttributesNamesOfSpecificEmployeeShouldReturnTrue(){
+    public void testGetAttributesNamesOfSpecificEmployeeShouldReturnTrue() {
         dbController.insertToAttributesTable("organized");
         dbController.insertToAttributesTable("fast");
 
@@ -184,7 +178,7 @@ public class DbControllerTests {
     }
 
     @Test
-    public void testGetAttributesNamesOfSpecificEmployeeShouldReturnFalse(){
+    public void testGetAttributesNamesOfSpecificEmployeeShouldReturnFalse() {
         dbController.insertToAttributesTable("organized");
         dbController.insertToAttributesTable("fast");
 
@@ -202,7 +196,7 @@ public class DbControllerTests {
     }
 
     @Test
-    public void testGetEmployeesNamesWithSpecificAttributeShouldReturnTrue(){
+    public void testGetEmployeesNamesWithSpecificAttributeShouldReturnTrue() {
         dbController.insertToAttributesTable("organized");
         dbController.insertToAttributesTable("fast");
 
@@ -221,7 +215,7 @@ public class DbControllerTests {
     }
 
     @Test
-    public void testGetEmployeesNamesWithSpecificAttributeShouldReturnFalse(){
+    public void testGetEmployeesNamesWithSpecificAttributeShouldReturnFalse() {
         dbController.insertToAttributesTable("organized");
         dbController.insertToAttributesTable("fast");
 
@@ -240,7 +234,7 @@ public class DbControllerTests {
     }
 
     @Test
-    public void testGetAttributesIdsShouldReturnTrue(){
+    public void testGetAttributesIdsShouldReturnTrue() {
         dbController.insertToAttributesTable("organized");
         dbController.insertToAttributesTable("fast");
 
@@ -252,7 +246,7 @@ public class DbControllerTests {
     }
 
     @Test
-    public void testGetAttributesIdsShouldReturnFalse(){
+    public void testGetAttributesIdsShouldReturnFalse() {
         dbController.insertToAttributesTable("organized");
         dbController.insertToAttributesTable("fast");
 
@@ -264,7 +258,7 @@ public class DbControllerTests {
     }
 
     @Test
-    public void testGetEmployeesIdsShouldReturnTrue(){
+    public void testGetEmployeesIdsShouldReturnTrue() {
         dbController.insertToEmployeesTable("John", "Yes", "10/02/2014", "Sofokleous 8, Athens");
         dbController.insertToEmployeesTable("Jake", "Yes", "10/02/2014", "Sofokleous 8, Athens");
 
@@ -276,7 +270,7 @@ public class DbControllerTests {
     }
 
     @Test
-    public void testGetEmployeesIdsShouldReturnFalse(){
+    public void testGetEmployeesIdsShouldReturnFalse() {
         dbController.insertToEmployeesTable("John", "Yes", "10/02/2014", "Sofokleous 8, Athens");
         dbController.insertToEmployeesTable("Jake", "Yes", "10/02/2014", "Sofokleous 8, Athens");
 
@@ -288,7 +282,7 @@ public class DbControllerTests {
     }
 
     @Test
-    public void testGetEmployeesNamesShouldReturnTrue(){
+    public void testGetEmployeesNamesShouldReturnTrue() {
         dbController.insertToEmployeesTable("John", "Yes", "10/02/2014", "Sofokleous 8, Athens");
         dbController.insertToEmployeesTable("Jake", "Yes", "10/02/2014", "Sofokleous 8, Athens");
 
@@ -300,7 +294,7 @@ public class DbControllerTests {
     }
 
     @Test
-    public void testGetEmployeesNamesShouldReturnFalse(){
+    public void testGetEmployeesNamesShouldReturnFalse() {
         dbController.insertToEmployeesTable("John", "Yes", "10/02/2014", "Sofokleous 8, Athens");
         dbController.insertToEmployeesTable("Jake", "Yes", "10/02/2014", "Sofokleous 8, Athens");
 
@@ -313,7 +307,7 @@ public class DbControllerTests {
     }
 
     @Test
-    public void testGetEmployeeHomeAddressShouldReturnTrue(){
+    public void testGetEmployeeHomeAddressShouldReturnTrue() {
         dbController.insertToEmployeesTable("John", "Yes", "10/02/2014", "Kallirois 8, Athens");
         dbController.insertToEmployeesTable("Jake", "Yes", "10/02/2014", "Sofokleous 8, Athens");
 
@@ -322,7 +316,7 @@ public class DbControllerTests {
     }
 
     @Test
-    public void testGetEmployeeHomeAddressShouldReturnFalse(){
+    public void testGetEmployeeHomeAddressShouldReturnFalse() {
         dbController.insertToEmployeesTable("John", "Yes", "10/02/2014", "Kallirois 8, Athens");
         dbController.insertToEmployeesTable("Jake", "Yes", "10/02/2014", "Sofokleous 8, Athens");
 
@@ -331,7 +325,7 @@ public class DbControllerTests {
     }
 
     @Test
-    public void testReplaceToEmployeeAttributeTableShouldReturnTrue(){
+    public void testReplaceToEmployeeAttributeTableShouldReturnTrue() {
         dbController.insertToAttributesTable("organized");
         dbController.insertToAttributesTable("fast");
 
@@ -348,7 +342,7 @@ public class DbControllerTests {
     }
 
     @Test
-    public void testReplaceToEmployeeAttributeTableShouldReturnFalse(){
+    public void testReplaceToEmployeeAttributeTableShouldReturnFalse() {
         dbController.insertToAttributesTable("organized");
         dbController.insertToAttributesTable("fast");
 
@@ -365,7 +359,7 @@ public class DbControllerTests {
     }
 
     @Test
-    public void testRemoveFromEmployeeAttributeTableShouldReturnTrue(){
+    public void testRemoveFromEmployeeAttributeTableShouldReturnTrue() {
         dbController.insertToAttributesTable("organized");
         dbController.insertToAttributesTable("fast");
 
@@ -382,7 +376,7 @@ public class DbControllerTests {
     }
 
     @Test
-    public void testRemoveFromEmployeeAttributeTableShouldReturnFalse(){
+    public void testRemoveFromEmployeeAttributeTableShouldReturnFalse() {
         dbController.insertToAttributesTable("organized");
         dbController.insertToAttributesTable("fast");
 
@@ -401,9 +395,8 @@ public class DbControllerTests {
     }
 
 
-
     @Test
-    public void testContainIntoAttributeTableShouldReturnTrue(){
+    public void testContainIntoAttributeTableShouldReturnTrue() {
         dbController.insertToAttributesTable("organized");
         dbController.insertToAttributesTable("fast");
 
@@ -411,7 +404,7 @@ public class DbControllerTests {
     }
 
     @Test
-    public void testContainIntoAttributeTableShouldReturnFalse(){
+    public void testContainIntoAttributeTableShouldReturnFalse() {
         dbController.insertToAttributesTable("organized");
         dbController.insertToAttributesTable("fast");
 
@@ -419,7 +412,7 @@ public class DbControllerTests {
     }
 
     @Test
-    public void testReplaceAttributeShouldReturnTrue(){
+    public void testReplaceAttributeShouldReturnTrue() {
         dbController.insertToAttributesTable("organized");
         dbController.insertToAttributesTable("fast");
 
@@ -433,7 +426,7 @@ public class DbControllerTests {
     }
 
     @Test
-    public void testReplaceAttributeShouldReturnFalse(){
+    public void testReplaceAttributeShouldReturnFalse() {
         dbController.insertToAttributesTable("organized");
         dbController.insertToAttributesTable("fast");
 
@@ -447,7 +440,7 @@ public class DbControllerTests {
     }
 
     @Test
-    public void testReplaceEmployeeShouldReturnTrue(){
+    public void testReplaceEmployeeShouldReturnTrue() {
         dbController.insertToEmployeesTable("John", "Yes", "10/02/2014", "Sofokleous 8, Athens");
         dbController.insertToEmployeesTable("Jake", "Yes", "10/02/2014", "Sofokleous 8, Athens");
 
@@ -461,7 +454,7 @@ public class DbControllerTests {
     }
 
     @Test
-    public void testReplaceEmployeeShouldReturnFalse(){
+    public void testReplaceEmployeeShouldReturnFalse() {
         dbController.insertToEmployeesTable("John", "Yes", "10/02/2014", "Sofokleous 8, Athens");
         dbController.insertToEmployeesTable("Jake", "Yes", "10/02/2014", "Sofokleous 8, Athens");
 
@@ -475,7 +468,7 @@ public class DbControllerTests {
     }
 
     @Test
-    public void testRemoveAttributeShouldReturnTrue(){
+    public void testRemoveAttributeShouldReturnTrue() {
         dbController.insertToAttributesTable("organized");
         dbController.insertToAttributesTable("fast");
 
@@ -488,7 +481,7 @@ public class DbControllerTests {
     }
 
     @Test
-    public void testRemoveAttributeShouldReturnFalse(){
+    public void testRemoveAttributeShouldReturnFalse() {
         dbController.insertToAttributesTable("organized");
         dbController.insertToAttributesTable("fast");
 
@@ -502,7 +495,7 @@ public class DbControllerTests {
     }
 
     @Test
-    public void testRemoveEmployeeShouldReturnTrue(){
+    public void testRemoveEmployeeShouldReturnTrue() {
         dbController.insertToEmployeesTable("John", "Yes", "10/02/2014", "Sofokleous 8, Athens");
         dbController.insertToEmployeesTable("Jake", "Yes", "10/02/2014", "Sofokleous 8, Athens");
 
@@ -515,7 +508,7 @@ public class DbControllerTests {
     }
 
     @Test
-    public void testRemoveEmployeeShouldReturnFalse(){
+    public void testRemoveEmployeeShouldReturnFalse() {
         dbController.insertToEmployeesTable("John", "Yes", "10/02/2014", "Sofokleous 8, Athens");
         dbController.insertToEmployeesTable("Jake", "Yes", "10/02/2014", "Sofokleous 8, Athens");
 
@@ -527,8 +520,6 @@ public class DbControllerTests {
 
         assertNotEquals(employee_names, dbController.getEmployees_names());
     }
-
-
 
 
 }

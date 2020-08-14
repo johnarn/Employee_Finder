@@ -15,7 +15,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class DbController {
 
     /**
-     *  Initialization of variables
+     * Initialization of variables
      */
     private SQLiteDatabase sql;
     private ArrayList<Integer> attributes_ids = new ArrayList<>();
