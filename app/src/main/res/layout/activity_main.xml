@@ -17,6 +17,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20sp"
+            android:background="@color/pressed_color"
+            android:textStyle="bold"
             android:text="@string/attributes" />
 
         <Button
@@ -24,6 +26,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20sp"
+            android:background="@color/pressed_color"
+            android:textStyle="bold"
             android:text="@string/employees" />
 
         <Button
@@ -31,6 +35,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20sp"
+            android:background="@color/pressed_color"
+            android:textStyle="bold"
             android:text="@string/map" />
 
     </LinearLayout>

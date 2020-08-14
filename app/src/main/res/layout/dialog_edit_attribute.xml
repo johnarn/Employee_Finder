@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_gravity="center">
 
     <TextView
@@ -12,18 +13,9 @@
         android:gravity="center_horizontal"
         android:text="@string/edit_attribute"
         android:textAlignment="center"
-        android:textSize="40sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/txtViewNameOfAttribute"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txtViewCreateAttribute"
-        android:layout_margin="30dp"
-        android:text="@string/name"
         android:textSize="30sp"
         android:textStyle="bold" />
+
 
     <EditText
         android:id="@+id/editTextEditAttributeName"
@@ -31,16 +23,15 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtViewCreateAttribute"
         android:layout_margin="30sp"
-        android:layout_toEndOf="@id/txtViewNameOfAttribute"
-        android:layout_toRightOf="@id/txtViewNameOfAttribute"
         android:autofillHints="Name of Attribute"
+        app:backgroundTint="@color/pressed_color"
         android:hint="@string/name_of_attribute"
         android:inputType="text" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txtViewNameOfAttribute"
+        android:layout_below="@+id/editTextEditAttributeName"
         android:layout_centerHorizontal="true"
         android:orientation="horizontal"
         android:weightSum="10">
@@ -52,7 +43,7 @@
             android:layout_margin="20dp"
             android:layout_weight="1"
             android:text="@string/ok"
-            android:textSize="25sp"
+            android:textSize="20sp"
 
             />
 
@@ -63,7 +54,7 @@
             android:layout_margin="20dp"
             android:layout_weight="1"
             android:text="@string/delete"
-            android:textSize="25sp" />
+            android:textSize="20sp" />
 
 
     </LinearLayout>

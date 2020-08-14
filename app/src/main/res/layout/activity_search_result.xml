@@ -21,7 +21,7 @@
         android:layout_height="400dp"
         android:layout_below="@+id/txtView"
         android:background="@drawable/bg_key"
-        android:listSelector="@color/colorPrimary"
+        android:listSelector="@color/selected_item"
         android:scrollbarAlwaysDrawVerticalTrack="true" />
 
     <Button

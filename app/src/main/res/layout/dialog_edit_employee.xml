@@ -84,7 +84,7 @@
 
     <TextView
 
-        android:id="@+id/headerlist"
+        android:id="@+id/headerList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/editTextEmployeeHomeAddress"
@@ -95,12 +95,12 @@
         android:id="@+id/listViewAttributeOfEmployee"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:layout_below="@+id/headerlist"
+        android:layout_below="@+id/headerList"
 
         />
 
     <TextView
-        android:id="@+id/headeravailablelistW"
+        android:id="@+id/headerAvailableList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/listViewAttributeOfEmployee"
@@ -111,17 +111,39 @@
         android:id="@+id/listViewAvailableAttributesOfEmployee"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:layout_below="@+id/headeravailablelistW" />
+        android:layout_below="@+id/headerAvailableList" />
 
-    <Button
-        android:id="@+id/btnEditOk"
+
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/listViewAvailableAttributesOfEmployee"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
         android:layout_centerInParent="true"
-        android:background="@drawable/round_button"
-        android:text="@string/ok"
-        android:textSize="20sp" />
+        android:weightSum="10">
+
+        <Button
+            android:id="@+id/btnEditOk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ok"
+            android:layout_margin="20dp"
+            android:textSize="20sp"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/btnEditDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:layout_weight="1"
+            android:text="@string/delete"
+            android:textSize="20sp" />
+
+
+    </LinearLayout>
 
 
 </RelativeLayout>

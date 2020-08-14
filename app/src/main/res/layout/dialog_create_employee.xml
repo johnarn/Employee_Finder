@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activityCreateEmployee"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -25,6 +26,7 @@
         android:layout_margin="5dp"
         android:autofillHints="Name of Employee"
         android:hint="@string/name_of_employee"
+        app:backgroundTint="@color/pressed_color"
         android:inputType="text" />
 
 
@@ -36,22 +38,24 @@
         android:layout_margin="5dp"
         android:autofillHints="Date Of Birth"
         android:hint="@string/date_of_birth"
+        app:backgroundTint="@color/pressed_color"
         android:inputType="date" />
 
     <TextView
         android:id="@+id/txtViewDriversLicense"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editTextEmployeeDayOfBirth"
+        android:layout_below="@+id/editTextEmployeeHomeAddress"
         android:layout_margin="5dp"
         android:text="@string/driver_s_license"
+        app:backgroundTint="@color/pressed_color"
         android:textSize="20sp" />
 
     <RadioGroup
         android:id="@+id/radioGroupDriversLicense"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editTextEmployeeDayOfBirth"
+        android:layout_below="@+id/editTextEmployeeHomeAddress"
         android:layout_margin="5dp"
         android:layout_toEndOf="@+id/txtViewDriversLicense"
         android:layout_toRightOf="@+id/txtViewDriversLicense"
@@ -76,31 +80,32 @@
         android:id="@+id/editTextEmployeeHomeAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txtViewDriversLicense"
+        android:layout_below="@+id/editTextEmployeeDayOfBirth"
         android:layout_margin="5dp"
         android:autofillHints="Home Address"
         android:hint="@string/home_address"
+        app:backgroundTint="@color/pressed_color"
         android:inputType="textPostalAddress" />
 
     <TextView
 
-        android:id="@+id/headerlist"
+        android:id="@+id/headerList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editTextEmployeeHomeAddress"
+        android:layout_below="@+id/radioGroupDriversLicense"
         android:layout_margin="10dp"
         android:text="@string/attributes" />
 
     <ListView
         android:id="@+id/listViewAttributeOfEmployee"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_below="@+id/headerlist"
+        android:layout_height="120dp"
+        android:layout_below="@+id/headerList"
 
         />
 
     <TextView
-        android:id="@+id/headeravailablelistW"
+        android:id="@+id/headerAvailableList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/listViewAttributeOfEmployee"
@@ -110,8 +115,8 @@
     <ListView
         android:id="@+id/listViewAvailableAttributesOfEmployee"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_below="@+id/headeravailablelistW" />
+        android:layout_height="120dp"
+        android:layout_below="@+id/headerAvailableList" />
 
     <Button
         android:id="@+id/btnCreateOk"
@@ -119,7 +124,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/listViewAvailableAttributesOfEmployee"
         android:layout_centerInParent="true"
-        android:background="@drawable/round_button"
+        android:layout_margin="10dp"
         android:text="@string/ok"
         android:textSize="20sp" />
 
