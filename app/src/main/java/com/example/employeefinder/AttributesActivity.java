@@ -135,11 +135,14 @@ public class AttributesActivity extends AppCompatActivity {
 
                 btnEditDelete.setOnClickListener(v -> {
 
-                    // Remove from the list the attribute
-                    listOfAttributes.remove(listOfAttributes.get(position));
+                    listOfAttributes = dbController.getAttributes_names();
+
 
                     // Remove the attribute from the database
                     dbController.removeAttribute(listOfAttributes.get(position));
+
+                    // Remove from the list the attribute
+                    listOfAttributes = dbController.getAttributes_names();
 
                     // Update the listView
                     adapter = new ArrayAdapter<>(AttributesActivity.this,
