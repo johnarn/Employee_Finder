@@ -142,9 +142,9 @@ public class DbController {
      * Replace an entry with a new one at EmployeeAttribute table
      * It recreates a new connection between an employee and an attribute
      */
-    public void replaceToEmployeeAttributeTable(String attribute_name, String employee_name, boolean flag) {
+    public void replaceToEmployeeAttributeTable(String attribute_name, String employee_name, boolean employee_already_exist) {
         //If the attribute-employee combination is an existing entry then delete it and create a new one
-        if (flag) {
+        if (employee_already_exist) {
             removeFromEmployeeAttributeTable(employee_name);
         }
         readFromAttributesTable("*");
