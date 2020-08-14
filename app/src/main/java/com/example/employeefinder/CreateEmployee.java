@@ -3,6 +3,7 @@ package com.example.employeefinder;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -130,5 +131,14 @@ public class CreateEmployee extends Activity {
                 finish();
             }
         });
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            setResult(1);
+            finish();
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

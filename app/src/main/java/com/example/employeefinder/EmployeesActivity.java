@@ -1,6 +1,7 @@
 package com.example.employeefinder;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -19,6 +20,8 @@ public class EmployeesActivity extends Activity {
     private ListView listViewOfEmployees;
     private ArrayAdapter<String> adapter;
     private int previous_position;
+
+    private Dialog create_employee_dialog;
 
 
     @Override
@@ -41,6 +44,8 @@ public class EmployeesActivity extends Activity {
                 android.R.layout.simple_list_item_1,
                 listItems);
         listViewOfEmployees.setAdapter(adapter);
+
+
 
         listViewOfEmployees.setOnItemClickListener((parent, view, position, id) -> {
 
@@ -68,8 +73,18 @@ public class EmployeesActivity extends Activity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        // Results returned when back button is pressed
+        if(resultCode == 1){
+
+            // Update the listView of the Employees
+            adapter = new ArrayAdapter<>(this,
+                    android.R.layout.simple_list_item_1,
+                    listItems);
+            listViewOfEmployees.setAdapter(adapter);
+        }
+
         // Results returned from CreateEmployee View
-        if (requestCode == 2) {
+        if (resultCode == 2) {
 
             // Get the returned result
             String returnedResult = data.getStringExtra("NAME");
@@ -82,14 +97,28 @@ public class EmployeesActivity extends Activity {
             listViewOfEmployees.setAdapter(adapter);
         }
 
-        // Results returned from EditEmployee View
-        if (requestCode == 3) {
+        // Results returned from EditEmployee View (Create Employee)
+        if (resultCode == 3) {
 
             // Get the returned result
             String returnedResult = data.getStringExtra("NAME");
 
             // Update the listView of the Employees
             listItems.set(previous_position, returnedResult);
+            adapter = new ArrayAdapter<>(this,
+                    android.R.layout.simple_list_item_1,
+                    listItems);
+            listViewOfEmployees.setAdapter(adapter);
+        }
+
+        // Results returned from EditEmployee View (Delete Employee)
+        if (resultCode == 4) {
+
+            // Get the returned result
+            String returnedResult = data.getStringExtra("NAME");
+
+            // Update the listView of the Employees
+            listItems.remove(returnedResult);
             adapter = new ArrayAdapter<>(this,
                     android.R.layout.simple_list_item_1,
                     listItems);

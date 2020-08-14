@@ -44,10 +44,13 @@ public class AttributesActivity extends AppCompatActivity {
         editDialog = new Dialog(AttributesActivity.this);
         editDialog.setContentView(R.layout.dialog_edit_attribute);
         editDialog.setCancelable(false);
+        editDialog.setCanceledOnTouchOutside(true);
 
         createDialog = new Dialog(AttributesActivity.this);
         createDialog.setContentView(R.layout.dialog_create_attribute);
         createDialog.setCancelable(false);
+        createDialog.setCanceledOnTouchOutside(true);
+
 
         // Get all the attributes names from the database
         listOfAttributes = dbController.getAttributes_names();
