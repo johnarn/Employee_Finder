@@ -135,13 +135,11 @@ public class AttributesActivity extends AppCompatActivity {
 
                 btnEditDelete.setOnClickListener(v -> {
 
-                    listOfAttributes = dbController.getAttributes_names();
-
 
                     // Remove the attribute from the database
                     dbController.removeAttribute(listOfAttributes.get(position));
 
-                    // Remove from the list the attribute
+                    // Get all the attributes names from the database
                     listOfAttributes = dbController.getAttributes_names();
 
                     // Update the listView
