@@ -30,7 +30,7 @@
         android:layout_alignParentBottom="true"
         android:layout_margin="20dp"
         android:backgroundTint="@color/pressed_color"
-        android:src="@mipmap/add_icon_foreground" />
+        android:src="@mipmap/white_add_icon_foreground" />
 
 
 </RelativeLayout>

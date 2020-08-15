@@ -19,6 +19,7 @@
             android:layout_margin="20sp"
             android:background="@color/pressed_color"
             android:textStyle="bold"
+            android:textColor="@color/default_color"
             android:text="@string/attributes" />
 
         <Button
@@ -28,6 +29,7 @@
             android:layout_margin="20sp"
             android:background="@color/pressed_color"
             android:textStyle="bold"
+            android:textColor="@color/default_color"
             android:text="@string/employees" />
 
         <Button
@@ -37,6 +39,7 @@
             android:layout_margin="20sp"
             android:background="@color/pressed_color"
             android:textStyle="bold"
+            android:textColor="@color/default_color"
             android:text="@string/map" />
 
     </LinearLayout>
